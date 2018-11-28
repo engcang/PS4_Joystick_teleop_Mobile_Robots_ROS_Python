@@ -182,6 +182,9 @@
 <br>
 
 ## ● Result for turtlebot2 and turtlebot3
-<p align="left">
-<img src="https://github.com/engcang/image-files/blob/master/joyteleop/Joy_TB3.gif" hspace="10"/>
+<p align="center">
+<img src="https://github.com/engcang/image-files/blob/master/joyteleop/Joy_TB3.gif"/>
+</p>
+<p align="center">
+<img src="https://github.com/engcang/image-files/blob/master/joyteleop/Joy_TB2.gif"/>
 </p>
