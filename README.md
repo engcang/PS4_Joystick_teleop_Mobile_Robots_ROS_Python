@@ -181,7 +181,7 @@
 
 <br>
 
-## ● Result data for turtlebot2 and turtlebot3
+## ● Result for turtlebot2 and turtlebot3
 <p align="center">
 <img src="" width="400" height="500" hspace="0"/>
 </p>
