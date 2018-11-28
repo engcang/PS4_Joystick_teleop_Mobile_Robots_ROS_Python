@@ -7,6 +7,7 @@
 ## Index
 + [Joystick Set up](#)
 + [Code explanation](#)
++ [Using code as ROS node](#)
 + [Robot Teleoperation Result](#)
 
 <br>
@@ -38,7 +39,7 @@
   $ rostopic echo /joy
   ~~~
 <p align="center">
-<img src="https://github.com/engcang/image-files/blob/master/joyteleop/joy_echo.JPG" width="500" hspace="0"/>
+<img src="https://github.com/engcang/image-files/blob/master/joyteleop/joy_echo.png" width="500" hspace="0"/>
 </p>
 <br>
 
