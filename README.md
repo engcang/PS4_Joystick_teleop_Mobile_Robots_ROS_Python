@@ -6,9 +6,9 @@
 
 ## Index
 + [Joystick Set up](#-joystick-set-up-and-install)
-+ [Code explanation](#)
-+ [Using code as ROS node](#)
-+ [Robot Teleoperation Result](#)
++ [Code explanation](#-code-explanation)
++ [Using code as ROS node](#-using-code-directly-or-as-ros-node)
++ [Robot Teleoperation Result](#-result-data-for-turtlebot2-and-turtlebot3)
 
 <br>
 
@@ -73,12 +73,13 @@
           self.pose_subscriber2 = rospy.Subscriber('/joy',Joy,self.callback)
           self.rate = rospy.Rate(20)
   ~~~
-  1.
-  2.
+  1.for turtlebot2, used **/mobile_base/commands/velocity** as velocity publishing topic, for turtlebot 3, should use **/cmd_vel** <br>
+  Both codes were uploaded on this repository. <br>
+  2.To get joystick's data, make subscriber under **'/joy'** topic
 
 <br>
 
-+ 
++ Class methods
   ~~~python
       def callback(self, data):
         global inn
@@ -104,12 +105,12 @@
         self.velocity_publisher.publish(vel_msg)
 
   ~~~
-  3.
+  3._**Callback**_ function is automatically implemented whenever data comes in under **joy** topic <br>
+  4.When joy data is not empty, **globall inn** is replaced with **'1'** <br>
 
 <br>
 
-## ● Using code directly or as ROS node
-+ 
++ main code
   ~~~python
   ''' main '''
   if __name__ == '__main__':
@@ -134,8 +135,13 @@
            print('no data in')
        turtle.rate.sleep()
   ~~~
+  5.when **global inn** is '1', do any tasks using joy buttons data and joy axes data <br>
+  6.when **rectangle** button is pushed, move slowly and **circle** button is pushed, move fast <br>
+  **X** button is pushed, stop and **triangle** button is pushed, reset _**Odometry**_ <br>
+
 <br>
 
+## ● Using code directly or as ROS node
 + 
   ~~~shell
   ~~~
