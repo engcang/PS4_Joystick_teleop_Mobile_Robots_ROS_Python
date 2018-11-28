@@ -42,9 +42,8 @@
 <img src="https://github.com/engcang/image-files/blob/master/joyteleop/joy_echo.png" width="500" hspace="0"/>
 </p>
 <br>
-
-+ 
-
++ data.buttons[0] is _rectangle_ button, [1] is _x_ button, [2] is _circle_ button and [3] is _triangle_ button each, the picture shows when I pushed _circle_ button <br>
++ data.axes[0] and data.axes[1] are Left stick's data corresponding to angular and linear _velocities_ each
 <br>
 
 + 
