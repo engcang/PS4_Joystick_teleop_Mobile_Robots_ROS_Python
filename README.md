@@ -142,32 +142,40 @@
 <br>
 
 ## ● Using code directly or as ROS node
-+ 
++ git clone the codes first
   ~~~shell
+  $ git clone https://github.com/engcang/PS4_Joystick_teleop_Mobile_Robots_ROS_Python.git
   ~~~
 <br>
 
 + Run the code directly with ROS Master
   ~~~shell
+  $ roslaunch turtlebot_bringup minimal.launch
+  $ rosrun joy joy_node
+  $ python PS4_Joystick_teleop_Mobile_Robots_ROS_Python/Joyteleop_turtlebot2.py
   ~~~
+  1.**Have to run robot_bringup first!** <br>
+  2.**Have to run joy_node** to get joystick data <br>
+  3.run python code
+  
 <br>
 
 + Run the code after make it as Node
   ~~~shell
   $ cd ~/catkin_ws/src
-  $ catkin_create_pkg <name> rospy roslib std_msgs
+  $ catkin_create_pkg <name> rospy roslib sensor_msgs geometry_msgs
   $ cd ~/catkin_ws && catkin_make
   $ cd ~/catkin_ws/src/<name> && mkdir scripts
-  $ mv ~/HC-SR04-UltraSonicSensor-ROS-RaspberryPi/ROS_sonar_sensor.py ~/catkin_ws/src/<name>/scripts
-  $ chmod +x ROS_sonar_sensor.py
+  $ mv ~/PS4_Joystick_teleop_Mobile_Robots_ROS_Python/Joyteleop_turtlebot2.py ~/catkin_ws/src/<name>/scripts
+  $ chmod +x Joyteleop_turtlebot2.py
   $ roscore
-  $ rosrun <name> ROS_sonar_sensor.py
+  $ rosrun <name> Joyteleop_turtlebot2.py
   ~~~
 <br>
 
 + Run the code by ROS launch
   ~~~xml
-  <node pkg="<name>" type="ROS_sonar_sensor.py" name="ROS_sonar_sensor" />
+  <node pkg="<name>" type="Joyteleop_turtlebot2.py" name="Joyteleop_turtlebot2" />
   ~~~
   Simply add this line into launch file you want to launch together
 
