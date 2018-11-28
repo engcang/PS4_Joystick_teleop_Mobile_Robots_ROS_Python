@@ -41,22 +41,37 @@
 <p align="center">
 <img src="https://github.com/engcang/image-files/blob/master/joyteleop/joy_echo.png" width="500" hspace="0"/>
 </p>
+
 <br>
 + data.buttons[0] is _rectangle_ button, [1] is _x_ button, [2] is _circle_ button and [3] is _triangle_ button each, the picture shows when I pushed _circle_ button <br>
 + data.axes[0] and data.axes[1] are Left stick's data corresponding to angular and linear _velocities_ each
-<br>
 
-+ 
-
-<p align="center">
-<img src="" width="500" hspace="0"/>
-</p>
-
-</br></br>
+<br><br><br>
 
 ## ● Code explanation
-+ Import libraries and 
++ Import libraries and init class
   ~~~python
+  import numpy as np
+  import rospy
+  import roslib
+  import subprocess
+  import time
+  from geometry_msgs.msg  import Twist
+  from sensor_msgs.msg import Joy
+  import sys
+  import signal
+
+  def signal_handler(signal, frame): # ctrl + c -> exit program
+          print('You pressed Ctrl+C!')
+          sys.exit(0)
+  signal.signal(signal.SIGINT, signal_handler)
+  ''' class '''
+  class robot():
+      def __init__(self):
+          rospy.init_node('robot_controller', anonymous=True)
+          self.velocity_publisher = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=1)
+          self.pose_subscriber2 = rospy.Subscriber('/joy',Joy,self.callback)
+          self.rate = rospy.Rate(20)
   ~~~
   1.
   2.
@@ -65,18 +80,62 @@
 
 + 
   ~~~python
+      def callback(self, data):
+        global inn
+        inn=0
+        self.joy = data.buttons
+        self.joy2= data.axes
+        if np.shape(self.joy)[0]>0:
+            inn=1
+            self.nemo=self.joy[0]
+            self.semo=self.joy[3]
+            self.one=self.joy[2]
+            self.x=self.joy[1]
+        if np.shape(self.joy2)[0]>0:
+            inn=1
+            self.linear=self.joy2[1]
+            self.angular=self.joy2[0]
+        if inn==1:
+            if self.joy[0]==0 and self.joy[1]==0 and self.joy[2]==0 and self.joy[3]==0 and self.joy2[0]==0 and self.joy2[1]==0:
+                inn=0
+            else:
+                pass
+    def moving(self,vel_msg):
+        self.velocity_publisher.publish(vel_msg)
+
   ~~~
   3.
 
 <br>
 
-## ● 
+## ● Using code directly or as ROS node
 + 
-  ~~~shell
+  ~~~python
+  ''' main '''
+  if __name__ == '__main__':
+   while 1:
+       if inn==1:
+          if turtle.nemo==1:
+               vel_msg.linear.x=turtle.linear*0.4
+               vel_msg.angular.z=turtle.angular*1.2
+          elif turtle.semo==1:
+               #subprocess.call('',shell=True)
+               p=subprocess.Popen('rostopic pub /mobile_base/commands/reset_odometry std_msgs/Empty "{}"',shell=True)
+               time.sleep(2)
+               p.terminate()
+          elif turtle.one==1:
+               vel_msg.linear.x=turtle.linear*0.7
+               vel_msg.angular.z=turtle.angular*2
+          elif turtle.x==1:
+               vel_msg.linear.x=0
+               vel_msg.angular.z=0
+          turtle.moving(vel_msg)        
+       else:
+           print('no data in')
+       turtle.rate.sleep()
   ~~~
 <br>
 
-## ● 
 + 
   ~~~shell
   ~~~
@@ -108,7 +167,7 @@
 
 <br>
 
-+ Result data by _**rostopic echo /sonar_dist**_
+## ● Result data for turtlebot2 and turtlebot3
 <p align="center">
-<img src="https://github.com/engcang/image-files/blob/master/sonar_sensor/ROS_topic.gif" width="400" height="500" hspace="0"/>
+<img src="" width="400" height="500" hspace="0"/>
 </p>
