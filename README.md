@@ -5,7 +5,7 @@
 </p>
 
 ## Index
-+ [Joystick Set up](#)
++ [Joystick Set up](#-joystick-set-up-and-install)
 + [Code explanation](#)
 + [Using code as ROS node](#)
 + [Robot Teleoperation Result](#)
